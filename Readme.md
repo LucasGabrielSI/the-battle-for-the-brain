@@ -2,7 +2,6 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 ## Gênero
   + Ação
-  + Aventura
   + Casual 
 
   
@@ -10,7 +9,7 @@
 >O game é voltado para jovens com idades entre 12 e 20 anos, mais pode ser jogado por todos os públicos.
 
 ## Objetivo
->O jogo tem como objetivo principal, abordar um tema que é tido como tabu na sociedade , a depressão.O tema é abordado no jogo de uma forma mais "leve" para que de forma lúdica e divertida as pessoas entedam e consigam lidar com os problemas sem o preconceito existente nos dias atuais,entretanto, vale ressaltar que o tema não é abordado de forma técnica, é apenas uma ilustração das várias "lutas" diarias que acontecem no nosso cérebro entre pensamentos e sentimentos bons e os ruins.
+>O jogo tem como objetivo principal, abordar um tema que é tido como tabu na sociedade , a depressão.O tema é abordado no jogo de uma forma mais "leve" para que de forma lúdica e divertida as pessoas entedam e consigam lidar com os problemas sem o preconceito existente nos dias atuais,entretanto, vale ressaltar que o tema não é abordado de forma técnica, é apenas uma ilustração das várias "lutas" diarias que acontecem no nosso cérebro entre pensamentos e sentimentos bons e ruins.
 
 ## Objetivos específicos
 + Coletar o máximo possivel de bolas claras(Light)
@@ -30,5 +29,29 @@
   + Esferas opostas
   
 ### Controles
+<p>
+  <img src="https://github.com/LucasGabrielSI/the-battle-for-the-brain/blob/master/arrows-40162_960_720.png" width="100" title="hover text"></br>
+Movimentação em todas as direções
+</p>
 
+### Diagrama de navegação
+<p>
+  <img src="https://github.com/LucasGabrielSI/the-battle-for-the-brain/blob/master/Untitled%20Diagram.png">
+</p>
 
+### Regras do jogo
++ O jogador inicia com três vidas, para cada colisão com o personagem oposto, o jogador perde uma vida
++ O jogador ganha 50 pontos para cada bola clara que pegar e perde 30 para cada bola escura, se a pontuação chegar a zero, o jogador perde uma vida
++ O jogador só deve buscar as bolas conrrespondentes ao seu personagem
++ O jogador não pode colidir com o personagem oposto 
+
+### Sistema de vidas
++ o jogador inicia com três vidas
+
+### Sistema de pontos
+ + O jogador ganha 50 pontos para cada bola de cor clara que pegar
+ + O jogador perde 30 pontos para cada bola de cor escura que pegar
+ + Ao passar pelo personagem oposto sem colidir, ganha 100 pontos extras
+ 
+ ### Como o jogo acaba
+ + O game se encerra quando todas as fases forem concluídas
