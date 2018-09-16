@@ -12,4 +12,5 @@ math.randomseed( os.time() )
 -- Remover a barra de status do celular
 display.setStatusBar( display.HiddenStatusBar )
 
-composer.gotoScene( "scene1" )
+
+composer.gotoScene( "menu")

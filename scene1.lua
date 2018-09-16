@@ -46,13 +46,15 @@ function scene:create( event )
     background.y = display.contentCenterY
 
     -- loading light
-    light = display.newImageRect(mainGroup, '_img/light.png', 200, 150)
+    local light = display.newImageRect(mainGroup, '_img/light.png', 200, 150)
     light.x = 50
     light.y = 150
     light.myName = 'light'
     physics.addBody( light, "static", { radius=40, bounce=0.1 }  )
 
-
+    local function gotoMenu()
+        composer.gotoScene( "game-over" )
+    end
 
     local function MoveLight( event )
         local light = event.target
@@ -82,7 +84,7 @@ function scene:create( event )
     light:addEventListener( "touch", MoveLight )
 
     local function createBall()
-        local newBall = display.newImageRect( mainGroup, '_img/circulo.png', 50, 50 )
+        local newBall = display.newImageRect( mainGroup, '_img/circulo.png', 40, 40 )
         table.insert( balls_table, newBall )
         physics.addBody( newBall, "dynamic", { radius=40, bounce=0.8 } )
         newBall.myName = "ball"
@@ -100,7 +102,7 @@ function scene:create( event )
     end
 
     local function createBall2()
-        local newBall2 = display.newImageRect( mainGroup, '_img/circulo-preto.png', 50, 50 )
+        local newBall2 = display.newImageRect( mainGroup, '_img/circulo-preto.png', 40, 40 )
         table.insert( balls_table, newBall2 )
         physics.addBody( newBall2, "dynamic", { radius=40, bounce=0.8 } )
         newBall2.myName = "ball2"
@@ -111,7 +113,7 @@ function scene:create( event )
             -- From the right
             newBall2.x = display.contentWidth + 100
             newBall2.y = math.random( 50 )
-            newBall2:setLinearVelocity( math.random( -90,-20 ), 0 )
+            newBall2:setLinearVelocity( math.random( -90,-20 ), math.random( 20,40 ) )
         end
 
         newBall2:applyTorque( math.random( -6,6 ) )
@@ -156,14 +158,29 @@ function scene:create( event )
             then
                 display.remove( obj1 )
                 score = score + 100
-			          scoreText.text = "Score: " .. score
-            end
-
+                      scoreText.text = "Score: " .. score
+                      if  (score == 1000) then
+                            -- loading dark
+                            local dark = display.newImageRect(mainGroup, '_img/dark.png', 200, 150)
+                            dark.x = 400
+                            dark.y = 400
+                            dark.myName = 'dark'
+                            physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
+                        end
+                end
             if(obj2.myName == "ball")
             then
                 display.remove( obj2 )
                 score = score + 100
-			          scoreText.text = "Score: " .. score
+                scoreText.text = "Score: " .. score
+                if  (score == 2000) then
+                    -- loading dark
+                    local dark = display.newImageRect(mainGroup, '_img/dark.png', 200, 150)
+                    dark.x = 200
+                    dark.y = 300
+                    dark.myName = 'dark'
+                    physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
+                end      
             end
         end
     end
@@ -186,8 +203,8 @@ Runtime:addEventListener( "collision", onCollision )
           if (obj1.myName == "ball2")
           then
               --display.remove( obj2 )
-              score = score - 100
-			        scoreText.text = "Score: " .. score
+              --score = score - 100
+			  --coreText.text = "Score: " .. score
 
               if ( died == false ) then
 				         died = true
@@ -197,7 +214,8 @@ Runtime:addEventListener( "collision", onCollision )
 				         livesText.text = "Lives: " .. lives
 
 				         if ( lives == 0 ) then
-					          display.remove( light )
+                              display.remove( light )
+                              composer.gotoScene( "game-over" )
 				         else
 					          light.alpha = 0
 					          timer.performWithDelay( 1000, restoreLight )
@@ -208,8 +226,8 @@ Runtime:addEventListener( "collision", onCollision )
           if(obj2.myName == "ball2")
           then
               --display.remove( obj1 )
-              score = score - 100
-			        scoreText.text = "Score: " .. score
+                --score = score - 100
+			    --scoreText.text = "Score: " .. score
 
               if ( died == false ) then
                  died = true
@@ -220,6 +238,7 @@ Runtime:addEventListener( "collision", onCollision )
 
                  if ( lives == 0 ) then
                     display.remove( light )
+                    composer.gotoScene( "game-over")
                  else
                     light.alpha = 0
                     timer.performWithDelay( 1000, restoreLight )
