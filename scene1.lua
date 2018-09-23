@@ -46,7 +46,7 @@ function scene:create( event )
     background.y = display.contentCenterY
 
     -- loading light
-    local light = display.newImageRect(mainGroup, '_img/light.png', 200, 150)
+    local light = display.newImageRect(mainGroup, '_img/light.png', 150, 120)
     light.x = 50
     light.y = 150
     light.myName = 'light'
@@ -84,7 +84,7 @@ function scene:create( event )
     light:addEventListener( "touch", MoveLight )
 
     local function createBall()
-        local newBall = display.newImageRect( mainGroup, '_img/circulo.png', 40, 40 )
+        local newBall = display.newImageRect( mainGroup, '_img/circulo.png', 15, 15 )
         table.insert( balls_table, newBall )
         physics.addBody( newBall, "dynamic", { radius=40, bounce=0.8 } )
         newBall.myName = "ball"
@@ -102,7 +102,7 @@ function scene:create( event )
     end
 
     local function createBall2()
-        local newBall2 = display.newImageRect( mainGroup, '_img/circulo-preto.png', 40, 40 )
+        local newBall2 = display.newImageRect( mainGroup, '_img/circulo-preto.png', 15, 15 )
         table.insert( balls_table, newBall2 )
         physics.addBody( newBall2, "dynamic", { radius=40, bounce=0.8 } )
         newBall2.myName = "ball2"
@@ -161,9 +161,9 @@ function scene:create( event )
                       scoreText.text = "Score: " .. score
                       if  (score == 1000) then
                             -- loading dark
-                            local dark = display.newImageRect(mainGroup, '_img/dark.png', 200, 150)
+                            local dark = display.newImageRect(mainGroup, '_img/dark.png', 300, 150)
                             dark.x = 400
-                            dark.y = 400
+                            dark.y = 150
                             dark.myName = 'dark'
                             physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
                         end
@@ -173,14 +173,14 @@ function scene:create( event )
                 display.remove( obj2 )
                 score = score + 100
                 scoreText.text = "Score: " .. score
-                if  (score == 2000) then
+                if  (score == 1000) then
                     -- loading dark
                     local dark = display.newImageRect(mainGroup, '_img/dark.png', 200, 150)
-                    dark.x = 200
-                    dark.y = 300
+                    dark.x = 400
+                    dark.y = 150
                     dark.myName = 'dark'
                     physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
-                end      
+                end
             end
         end
     end
