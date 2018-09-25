@@ -22,6 +22,7 @@ local score = 0
 local died = false
 local livesText
 local scoreText
+local dark 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -133,7 +134,6 @@ function scene:create( event )
       	light.x = display.contentCenterX
       	light.y = display.contentHeight - 100
 
-      	-- Fade in the ship
       	transition.to( light, { alpha=1, time=4000,
       		onComplete = function()
       			light.isBodyActive = true
@@ -141,6 +141,32 @@ function scene:create( event )
       		end
       	} )
     end
+
+    --Função executada a 1 milisegundo, cuida da movimentação dos personagens
+    function persegue()
+
+	--Calcula a distancia entre doispontos no plano cartesiano
+	    local distancia = math.sqrt ((light.x-dark.x)^2 + (light.y-dark.y) ^2)		
+
+		--Verifica se ha distancia minima para perseguir
+		if (distancia > 40) then
+			if(dark.y < light.y) then
+				dark.y = dark.y + 0.75
+			end
+			if(dark.y > light.y) then
+				dark.y = dark.y - 0.75
+			end
+			if(dark.x < light.x) then
+				dark.x = dark.x + 0.75
+			end
+			if(dark.x > light.x) then
+				dark.x = dark.x - 0.75
+			end
+		else
+			timer.pause(timer1)
+        end
+end
+
 
     local function onCollision( event )
 
@@ -161,11 +187,13 @@ function scene:create( event )
                       scoreText.text = "Score: " .. score
                       if  (score == 1000) then
                             -- loading dark
-                            local dark = display.newImageRect(mainGroup, '_img/dark.png', 300, 150)
+                            dark = display.newImageRect(mainGroup, '_img/dark.png', 300, 150)
                             dark.x = 400
                             dark.y = 150
                             dark.myName = 'dark'
                             physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
+
+                            timer1 = timer.performWithDelay(1, persegue, 0)
                         end
                 end
             if(obj2.myName == "ball")
@@ -175,11 +203,13 @@ function scene:create( event )
                 scoreText.text = "Score: " .. score
                 if  (score == 1000) then
                     -- loading dark
-                    local dark = display.newImageRect(mainGroup, '_img/dark.png', 200, 150)
+                    dark = display.newImageRect(mainGroup, '_img/dark.png', 200, 150)
                     dark.x = 400
                     dark.y = 150
                     dark.myName = 'dark'
                     physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
+
+                    timer1 = timer.performWithDelay(1, persegue, 0)
                 end
             end
         end
