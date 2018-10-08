@@ -32,6 +32,9 @@ function scene:create( event )
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
+    
+    local backgroundmusic = audio.loadSound('_audios/If_I_Had_a_Chicken.mp3')
+    audio.play(backgroundmusic)
 
     livesText = display.newText( uiGroup, "Lives: " .. lives, 100, 40, native.systemFont, 24 )
     scoreText = display.newText( uiGroup, "Score: " .. score, 250, 40, native.systemFont, 24 )
@@ -187,7 +190,7 @@ end
                       scoreText.text = "Score: " .. score
                       if  (score == 1000) then
                             -- loading dark
-                            dark = display.newImageRect(mainGroup, '_img/dark.png', 300, 150)
+                            dark = display.newImageRect(mainGroup, '_img/dark.png', 150, 120)
                             dark.x = 400
                             dark.y = 150
                             dark.myName = 'dark'
@@ -203,7 +206,7 @@ end
                 scoreText.text = "Score: " .. score
                 if  (score == 1000) then
                     -- loading dark
-                    dark = display.newImageRect(mainGroup, '_img/dark.png', 200, 150)
+                    dark = display.newImageRect(mainGroup, '_img/dark.png', 150, 120)
                     dark.x = 400
                     dark.y = 150
                     dark.myName = 'dark'
@@ -245,6 +248,7 @@ Runtime:addEventListener( "collision", onCollision )
 
 				         if ( lives == 0 ) then
                               display.remove( light )
+                              audio.pause(backgroundmusic)
                               composer.gotoScene( "game-over" )
 				         else
 					          light.alpha = 0
@@ -268,6 +272,7 @@ Runtime:addEventListener( "collision", onCollision )
 
                  if ( lives == 0 ) then
                     display.remove( light )
+                    audio.pause(backgroundmusic)
                     composer.gotoScene( "game-over")
                  else
                     light.alpha = 0
@@ -322,7 +327,7 @@ function scene:destroy( event )
 
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
-
+    
 end
 
 
