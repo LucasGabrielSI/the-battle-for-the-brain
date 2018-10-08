@@ -28,7 +28,10 @@ local gameLoopTimer
 function scene:create( event )
  
     local sceneGroup = self.view
-    
+
+    local backgroundmusic = audio.loadSound('_audios/Memory_Rain.mp3')
+    audio.play(backgroundmusic)
+
     local background = display.newImageRect( backGroup, '_img/backs/back03.png', 1250, 700)
 
     local logo = display.newImageRect( mainGroup, '_img/logo_gameover.png', 300, 100)
@@ -42,7 +45,6 @@ function scene:create( event )
     local backButton = display.newImageRect( mainGroup, "_img/backbtn.png", 80, 45 )
 	backButton.x = display.contentCenterX + 230
 	backButton.y = display.contentCenterY + 130
-
     backButton:addEventListener( "tap", gotoMenu )
 
     local function createBall()
@@ -110,6 +112,7 @@ function scene:destroy( event )
  
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
+    
  
 end
  
