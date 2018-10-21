@@ -36,6 +36,9 @@ function scene:create( event )
     local backgroundmusic = audio.loadSound('_audios/If_I_Had_a_Chicken.mp3')
     audio.play(backgroundmusic)
 
+    local powerup = audio.loadSound('_audios/powerup.wav')
+    local death = audio.loadSound('_audios/morte.mp3')
+
     livesText = display.newText( uiGroup, "Lives: " .. lives, 100, 40, native.systemFont, 24 )
     scoreText = display.newText( uiGroup, "Score: " .. score, 250, 40, native.systemFont, 24 )
 
@@ -116,8 +119,8 @@ function scene:create( event )
         if ( whereFrom == 3 ) then
             -- From the right
             newBall2.x = display.contentWidth + 100
-            newBall2.y = math.random( 50 )
-            newBall2:setLinearVelocity( math.random( -90,-20 ), math.random( 20,40 ) )
+            newBall2.y = math.random( 30 )
+            newBall2:setLinearVelocity( math.random( -50,-10 ), math.random( 10,30 ) )
         end
 
         newBall2:applyTorque( math.random( -6,6 ) )
@@ -187,6 +190,7 @@ end
             then
                 display.remove( obj1 )
                 score = score + 100
+                audio.play(powerup)
                       scoreText.text = "Score: " .. score
                       if  (score == 1000) then
                             -- loading dark
@@ -203,6 +207,7 @@ end
             then
                 display.remove( obj2 )
                 score = score + 100
+                audio.play(powerup)
                 scoreText.text = "Score: " .. score
                 if  (score == 1000) then
                     -- loading dark
@@ -243,7 +248,8 @@ Runtime:addEventListener( "collision", onCollision )
 				         died = true
 
 				         -- Update lives
-				         lives = lives - 1
+                         lives = lives - 1
+                         audio.play(death)
 				         livesText.text = "Lives: " .. lives
 
 				         if ( lives == 0 ) then
@@ -268,6 +274,7 @@ Runtime:addEventListener( "collision", onCollision )
 
                  -- Update lives
                  lives = lives - 1
+                 audio.play(death)
                  livesText.text = "Lives: " .. lives
 
                  if ( lives == 0 ) then
@@ -327,7 +334,8 @@ function scene:destroy( event )
 
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
-    
+    audio.pause(powerup)
+    audio.pause(death)
 end
 
 
