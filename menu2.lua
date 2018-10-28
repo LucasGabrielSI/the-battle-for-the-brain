@@ -50,8 +50,8 @@ function scene:create( event )
             top = 150,
             width = 100,
             height = 50,
-            defaultFile = '_img/botao_iniciar.png',
-            overFile = '_img/botao_iniciar.png',
+            defaultFile = '_img/botao-inicar1.png',
+            overFile = '_img/botao-inicar1.png',
         }
 
         button_init:addEventListener( "tap", gotoMenu )

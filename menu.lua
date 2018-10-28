@@ -40,7 +40,7 @@ function scene:create( event )
         background.x = display.contentCenterX
         background.y = display.contentCenterY
 
-        local nameOfgame = display.newImageRect( mainGroup, '_img/logo.png', 255, 75)
+        local nameOfgame = display.newImageRect( mainGroup, '_img/logo.png', 275, 95)
         nameOfgame.x = display.contentCenterX 
         nameOfgame.y = display.contentCenterY - 100
 
@@ -50,8 +50,8 @@ function scene:create( event )
             top = 150,
             width = 100,
             height = 50,
-            defaultFile = '_img/botao_iniciar.png',
-            overFile = '_img/botao_iniciar.png',
+            defaultFile = '_img/botao-inicar1.png',
+            overFile = '_img/botao-inicar1.png',
         }
 
         button_init:addEventListener( "tap", gotoMenu )

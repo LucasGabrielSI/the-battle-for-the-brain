@@ -192,7 +192,7 @@ end
                 score = score + 100
                 audio.play(powerup)
                       scoreText.text = "Score: " .. score
-                      if  (score == 1000) then
+                      if  (score == 3000) then
                             -- loading dark
                             dark = display.newImageRect(mainGroup, '_img/dark.png', 150, 120)
                             dark.x = 400
@@ -209,7 +209,7 @@ end
                 score = score + 100
                 audio.play(powerup)
                 scoreText.text = "Score: " .. score
-                if  (score == 1000) then
+                if  (score == 3000) then
                     -- loading dark
                     dark = display.newImageRect(mainGroup, '_img/dark.png', 150, 120)
                     dark.x = 400
@@ -343,9 +343,9 @@ end
 -- Scene event function listeners
 -- -----------------------------------------------------------------------------------
 scene:addEventListener( "create", scene )
---scene:addEventListener( "show", scene )
---scene:addEventListener( "hide", scene )
---scene:addEventListener( "destroy", scene )
+scene:addEventListener( "show", scene )
+scene:addEventListener( "hide", scene )
+scene:addEventListener( "destroy", scene )
 -- -----------------------------------------------------------------------------------
 
 return scene

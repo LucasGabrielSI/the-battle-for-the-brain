@@ -34,18 +34,28 @@ function scene:create( event )
 
     local background = display.newImageRect( backGroup, '_img/backs/back03.png', 1250, 700)
 
-    local logo = display.newImageRect( mainGroup, '_img/logo_gameover.png', 300, 100)
+    local logo = display.newImageRect( mainGroup, '_img/game-over.png', 300, 100)
     logo.x = display.contentCenterX
     logo.y = display.contentCenterY
 
     local function gotoMenu()
+        audio.pause(backgroundmusic)
         composer.gotoScene( "menu2" )
     end
+
+    local function gotoPontuacao()
+        composer.gotoScene( "pontuacao" )
+    end
     
-    local backButton = display.newImageRect( mainGroup, "_img/backbtn.png", 80, 45 )
+    local backButton = display.newImageRect( mainGroup, "_img/button-return.png", 80, 45 )
 	backButton.x = display.contentCenterX + 230
 	backButton.y = display.contentCenterY + 130
     backButton:addEventListener( "tap", gotoMenu )
+
+    local recordButton = display.newImageRect( mainGroup, "_img/pontuacao.png", 80, 45 )
+	recordButton.x = display.contentCenterX - 230
+	recordButton.y = display.contentCenterY + 130
+    recordButton:addEventListener( "tap", gotoPontuacao )
 
     local function createBall()
         local newBall = display.newImageRect( mainGroup, '_img/circulo-preto.png', 40, 40 )
@@ -112,8 +122,9 @@ function scene:destroy( event )
  
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
-    
- 
+    display.remove(logo)
+    display.remove(backButton)
+    display.remove(recordButton)
 end
  
  
