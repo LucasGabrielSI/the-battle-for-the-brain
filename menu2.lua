@@ -40,16 +40,16 @@ function scene:create( event )
         background.x = display.contentCenterX
         background.y = display.contentCenterY
 
-        local nameOfgame = display.newImageRect( mainGroup, '_img/logo.png', 255, 75)
+        local nameOfgame = display.newImageRect( mainGroup, '_img/logo.png', 375, 75)
         nameOfgame.x = display.contentCenterX 
         nameOfgame.y = display.contentCenterY - 100
 
         local button_init = widget.newButton
         {
-            left = 180,
-            top = 150,
-            width = 100,
-            height = 50,
+            left = 125,
+            top = 100,
+            width = 200,
+            height = 150,
             defaultFile = '_img/iniciar.png',
             overFile = '_img/iniciar.png',
         }

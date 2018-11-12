@@ -32,7 +32,7 @@ function scene:create( event )
     local backgroundmusic = audio.loadSound('_audios/Memory_Rain.mp3')
     audio.play(backgroundmusic)
 
-    local background = display.newImageRect( backGroup, '_img/backs/back03.png', 1250, 700)
+    local background = display.newImageRect( backGroup, '_img/cerebro_game_over.png', 1250, 700)
 
     local logo = display.newImageRect( mainGroup, '_img/game-over.png', 300, 100)
     logo.x = display.contentCenterX
@@ -47,14 +47,14 @@ function scene:create( event )
         composer.gotoScene( "pontuacao" )
     end
     
-    local backButton = display.newImageRect( mainGroup, "_img/button-return.png", 80, 45 )
+    local backButton = display.newImageRect( mainGroup, "_img/voltar.png", 140, 120 )
 	backButton.x = display.contentCenterX + 230
-	backButton.y = display.contentCenterY + 130
+	backButton.y = display.contentCenterY + 150
     backButton:addEventListener( "tap", gotoMenu )
 
-    local recordButton = display.newImageRect( mainGroup, "_img/pontuacao.png", 80, 45 )
+    local recordButton = display.newImageRect( mainGroup, "_img/pontuacao.png", 140, 120 )
 	recordButton.x = display.contentCenterX - 230
-	recordButton.y = display.contentCenterY + 130
+	recordButton.y = display.contentCenterY + 150
     recordButton:addEventListener( "tap", gotoPontuacao )
 
     local function createBall()

@@ -48,12 +48,12 @@ function scene:create( event )
     end
 
     -- background of game
-    local background = display.newImageRect( backGroup, '_img/backs/cerebro.jpg', 1250, 800)
+    local background = display.newImageRect( backGroup, '_img/back.png', display.contentWidth + 350, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
 
     -- loading light
-    local light = display.newImageRect(mainGroup, '_img/light.png', 150, 120)
+    local light = display.newImageRect(mainGroup, '_img/personagem_light.png', 150, 160)
     light.x = 50
     light.y = 150
     light.myName = 'light'
@@ -101,8 +101,8 @@ function scene:create( event )
         if ( whereFrom == 3 ) then
             -- From the right
             newBall.x = display.contentWidth + 100
-            newBall.y = math.random( 50 )
-            newBall:setLinearVelocity( math.random( -90,-20 ), math.random( 20,40 ) )
+            newBall.y = math.random(  display.contentHeight )
+            newBall:setLinearVelocity( -80, 0 )
         end
 
         newBall:applyTorque( math.random( -6,6 ) )
@@ -119,8 +119,8 @@ function scene:create( event )
         if ( whereFrom == 3 ) then
             -- From the right
             newBall2.x = display.contentWidth + 100
-            newBall2.y = math.random( 30 )
-            newBall2:setLinearVelocity( math.random( -90,-40 ), math.random( 60,90 ) )
+            newBall2.y = math.random( display.contentHeight )
+            newBall2:setLinearVelocity( -100 , 0 )
         end
 
         newBall2:applyTorque( math.random( -6,6 ) )
@@ -133,7 +133,7 @@ function scene:create( event )
         createBall2()
 
     end
-    gameLoopTimer = timer.performWithDelay( 800, gameLoop, 0 )
+    gameLoopTimer = timer.performWithDelay( 600, gameLoop, 0 )
 
     local function restoreLight()
       	light.isBodyActive = false
@@ -178,8 +178,7 @@ end
         dark.x = 400
         dark.y = 150
         dark.myName = 'dark'
-        physics.addBody( dark, "static", { radius=20, bounce=0.1 }  )
-
+        physics.addBody( dark, "dynamic", { radius=20, bounce=0.1 }  )
         timer1 = timer.performWithDelay(1, persegue, 0)
     end
 
@@ -201,7 +200,7 @@ end
                 score = score + 100
                 audio.play(powerup)
                     scoreText.text = "Score: " .. score
-                    if  (score == 3000) then
+                    if  (score == 2000) then
                         createDark()    
                     end
                 end
@@ -211,7 +210,7 @@ end
                 score = score + 100
                 audio.play(powerup)
                 scoreText.text = "Score: " .. score
-                if  (score == 3000) then
+                if  (score == 2000) then
                     -- loading dark
                     createDark()
                 end
