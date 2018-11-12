@@ -48,7 +48,7 @@ function scene:create( event )
     end
 
     -- background of game
-    local background = display.newImageRect( backGroup, '_img/background.png', 1250, 700)
+    local background = display.newImageRect( backGroup, '_img/backs/cerebro.jpg', 1250, 800)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
 
@@ -57,7 +57,7 @@ function scene:create( event )
     light.x = 50
     light.y = 150
     light.myName = 'light'
-    physics.addBody( light, "static", { radius=40, bounce=0.1 }  )
+    physics.addBody( light, "static", { radius=5, bounce=0.1 }  )
 
     local function gotoMenu()
         composer.gotoScene( "game-over" )
@@ -120,7 +120,7 @@ function scene:create( event )
             -- From the right
             newBall2.x = display.contentWidth + 100
             newBall2.y = math.random( 30 )
-            newBall2:setLinearVelocity( math.random( -50,-10 ), math.random( 10,30 ) )
+            newBall2:setLinearVelocity( math.random( -90,-40 ), math.random( 60,90 ) )
         end
 
         newBall2:applyTorque( math.random( -6,6 ) )
@@ -173,6 +173,15 @@ function scene:create( event )
         end
 end
 
+    local function createDark()
+        dark = display.newImageRect(mainGroup, '_img/dark.png', 150, 120)
+        dark.x = 400
+        dark.y = 150
+        dark.myName = 'dark'
+        physics.addBody( dark, "static", { radius=20, bounce=0.1 }  )
+
+        timer1 = timer.performWithDelay(1, persegue, 0)
+    end
 
     local function onCollision( event )
 
@@ -191,17 +200,10 @@ end
                 display.remove( obj1 )
                 score = score + 100
                 audio.play(powerup)
-                      scoreText.text = "Score: " .. score
-                      if  (score == 3000) then
-                            -- loading dark
-                            dark = display.newImageRect(mainGroup, '_img/dark.png', 150, 120)
-                            dark.x = 400
-                            dark.y = 150
-                            dark.myName = 'dark'
-                            physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
-
-                            timer1 = timer.performWithDelay(1, persegue, 0)
-                        end
+                    scoreText.text = "Score: " .. score
+                    if  (score == 3000) then
+                        createDark()    
+                    end
                 end
             if(obj2.myName == "ball")
             then
@@ -211,13 +213,7 @@ end
                 scoreText.text = "Score: " .. score
                 if  (score == 3000) then
                     -- loading dark
-                    dark = display.newImageRect(mainGroup, '_img/dark.png', 150, 120)
-                    dark.x = 400
-                    dark.y = 150
-                    dark.myName = 'dark'
-                    physics.addBody( dark, "static", { radius=40, bounce=0.1 }  )
-
-                    timer1 = timer.performWithDelay(1, persegue, 0)
+                    createDark()
                 end
             end
         end
@@ -237,59 +233,35 @@ Runtime:addEventListener( "collision", onCollision )
            ( obj1.myName == "light" and obj2.myName == "ball2" ) )
 
       then
-
-          if (obj1.myName == "ball2")
-          then
+        if (obj1.myName == "ball2" or obj2.myName == "ball2")
+            then
               --display.remove( obj2 )
               --score = score - 100
 			  --coreText.text = "Score: " .. score
 
-              if ( died == false ) then
-				         died = true
+              if ( died == false ) 
+              then
+				    died = true
 
-				         -- Update lives
-                         lives = lives - 1
-                         audio.play(death)
-				         livesText.text = "Lives: " .. lives
+				    -- Update lives
+                    lives = lives - 1
+                    audio.play(death)
+				    livesText.text = "Lives: " .. lives
 
-				         if ( lives == 0 ) then
-                              display.remove( light )
-                              audio.pause(backgroundmusic)
-                              composer.gotoScene( "game-over" )
-				         else
-					          light.alpha = 0
-					          timer.performWithDelay( 1000, restoreLight )
-				         end
-			        end
-          end
-
-          if(obj2.myName == "ball2")
-          then
-              --display.remove( obj1 )
-                --score = score - 100
-			    --scoreText.text = "Score: " .. score
-
-              if ( died == false ) then
-                 died = true
-
-                 -- Update lives
-                 lives = lives - 1
-                 audio.play(death)
-                 livesText.text = "Lives: " .. lives
-
-                 if ( lives == 0 ) then
-                    display.remove( light )
-                    audio.pause(backgroundmusic)
-                    composer.gotoScene( "game-over")
-                 else
-                    light.alpha = 0
-                    timer.performWithDelay( 1000, restoreLight )
-                 end
-              end
-          end
-      end
-  end
-  end
+				    if ( lives == 0 ) then
+                        display.remove( light )
+                        audio.pause(backgroundmusic)
+                        composer.setVariable("finalScore", score)
+                        composer.gotoScene( "game-over" )
+				    else
+					    light.alpha = 0
+					    timer.performWithDelay( 1000, restoreLight )
+				    end
+			    end
+            end
+        end
+    end
+end
 
 Runtime:addEventListener( "collision", onCollision )
 end

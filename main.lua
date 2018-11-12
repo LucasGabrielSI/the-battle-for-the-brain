@@ -3,7 +3,6 @@
 -- main.lua
 --
 -----------------------------------------------------------------------------------------
-
 local composer = require( 'composer' )
 
 -- Gerador de numero aleatorios
